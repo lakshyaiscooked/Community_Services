@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+/* ---- Design tokens (colours + fonts). Change them here and the whole site updates. ---- */
+@theme inline {
+  --color-ivory: #faf8f4;      /* page background */
+  --color-sand: #f1eee7;       /* alternate section background */
+  --color-line: #ddd8cc;       /* borders */
+  --color-ink: #16222e;        /* main text */
+  --color-muted: #4a5563;      /* secondary text (AA contrast on ivory) */
+  --color-navy: #17324d;       /* primary brand colour */
+  --color-navy-hover: #0f2438;
+  --color-brass: #b08a3e;      /* decorative accent (lines, icons) - not for small text */
+  --color-brass-light: #c9a25a;/* accent button background */
+  --color-brass-dark: #7a5a17; /* accent text on light backgrounds (AA) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --font-serif: var(--font-source-serif), Georgia, "Times New Roman", serif;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { background: var(--color-ivory); color: var(--color-ink); }
+  h1, h2, h3 { font-family: var(--font-serif); letter-spacing: -0.01em; }
+
+  /* Visible keyboard focus everywhere */
+  :focus-visible { outline: 3px solid var(--color-brass-dark); outline-offset: 3px; }
+  .on-dark :focus-visible { outline-color: #f2d79b; }
+  .on-light :focus-visible { outline-color: var(--color-brass-dark); } /* light panel inside a dark section */
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
+}
+
+@layer components {
+  .container-page { width: 100%; max-width: 72rem; margin-inline: auto; padding-inline: 1.25rem; }
+  @media (min-width: 640px) { .container-page { padding-inline: 1.5rem; } }
+  /* Understated temporary image tile (replaces the old striped box) */
+  .placeholder-tile { background: linear-gradient(160deg, #f4f1ea 0%, #e9e4d9 100%); }
+  /* Consistent vertical rhythm between homepage sections */
+  .section-y { padding-top: 3.5rem; }
+  @media (min-width: 768px) { .section-y { padding-top: 5rem; } }
+}
